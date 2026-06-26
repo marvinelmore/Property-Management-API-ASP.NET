@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using BuildingManagement.API.Entities;
 using BuildingManagement.API.Interfaces;
 using BuildingManagement.API.Data;
@@ -6,17 +7,20 @@ namespace BuildingManagement.API.Services;
 
 public class BuildingService : IBuildingService
 {
+    private readonly ILogger<BuildingService> _logger;
     // Private fields go at the TOP of the class, before the constructor
     private readonly ApplicationDbContext _context;
 
     // Constructor
-    public BuildingService(ApplicationDbContext context)
+    public BuildingService(ApplicationDbContext context, ILogger<BuildingService> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     public IEnumerable<Building> GetAll()
-    {
+    {   
+        _logger.LogInformation("....GET ALL Buildings called....");
         // Pulls all rows from Database
         return _context.Buildings.ToList();
     }
@@ -35,5 +39,22 @@ public class BuildingService : IBuildingService
         _context.Buildings.Add(building);
         await _context.SaveChangesAsync();
         return building;
+    }
+
+
+    public async Task<Building?> Update(int id, Building updatedBuilding)
+    {
+        var existing = await _context.Buildings.FirstOrDefaultAsync(b => b.Id == id);
+
+        if (existing == null)
+            return null;
+
+        existing.Name = updatedBuilding.Name;
+        existing.Address = updatedBuilding.Address;
+        existing.NumberOfUnits = updatedBuilding.NumberOfUnits;
+
+        await _context.SaveChangesAsync();
+
+        return existing;
     }
 }

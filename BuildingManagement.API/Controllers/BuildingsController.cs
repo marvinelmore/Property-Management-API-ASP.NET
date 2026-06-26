@@ -36,6 +36,25 @@ public class BuildingsController : ControllerBase
         return Ok(building);
     }
 
+    // Update: api/buildings/1
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, CreateBuildingDto dto)
+    {
+        var updated = new Building
+        {
+            Name = dto.Name,
+            Address = dto.Address,
+            NumberOfUnits = dto.NumberOfUnits
+        };
+
+        var result = await _buildingService.Update(id, updated);
+
+        if (result == null)
+            return NotFound();
+
+        return Ok(result);
+    }
+
     // POST: api/buildings
     [HttpPost]
     public async Task<IActionResult> Create(CreateBuildingDto dto)

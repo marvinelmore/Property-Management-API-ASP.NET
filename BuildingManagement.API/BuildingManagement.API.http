@@ -13,3 +13,14 @@ Content-Type: application/json
     "address": "123 Main Street",
     "numberOfUnits": 50
 }
+
+###
+
+PUT http://localhost:5247/api/buildings/1
+Content-Type: application/json
+
+{
+    "name": "Updated Building",
+    "address": "New Address",
+    "numberOfUnits": 99
+}
