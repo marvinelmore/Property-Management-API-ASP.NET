@@ -26,13 +26,13 @@ public class BuildingsController : ControllerBase
     [HttpGet]
     public IActionResult GetAll()
     {
-        var buildings = _buildingService.GetAll();
+        var result = _buildingService.GetAll();
         _logger.LogInformation("Getting all buildings.");
         return Ok(new ApiResponse<IEnumerable<Building>>
         {
-            Success = true,
-            Message = "Buildings retrieved successfully.",
-            Data = buildings
+            Success = result.IsSuccess,
+            Message = result.Message,
+            Data = result.Data
         });
     }
 

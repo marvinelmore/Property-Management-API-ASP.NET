@@ -19,11 +19,12 @@ public class BuildingService : IBuildingService
         _logger = logger;
     }
 
-    public IEnumerable<Building> GetAll()
+    public Result<IEnumerable<Building>> GetAll()
     {   
         _logger.LogInformation("....GET ALL Buildings called....");
         // Pulls all rows from Database
-        return _context.Buildings.ToList();
+        var buildings =  _context.Buildings.ToList();
+        return Result<IEnumerable<Building>>.Success(buildings, "Buildings retrieved successfully");
     }
 
     // Get Building by Id
