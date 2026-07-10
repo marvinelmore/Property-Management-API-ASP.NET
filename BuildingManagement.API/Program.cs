@@ -1,43 +1,46 @@
+using BuildingManagement.API.Data;
 using BuildingManagement.API.Interfaces;
+using BuildingManagement.API.Middleware;
 using BuildingManagement.API.Services;
 using Microsoft.EntityFrameworkCore;
-using BuildingManagement.API.Data;
-using BuildingManagement.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register services
+// Register controller support.
 builder.Services.AddControllers();
 
-// (DI) .NET sees IBuildingService here and automatically injects it
+// Register Swagger/OpenAPI services.
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Register application services.
 builder.Services.AddScoped<IBuildingService, BuildingService>();
 
-
-// Register the database context with dependency injection
-// ApplicationDbContext is our bridge between C# and PostgreSQL
-// AddDbContext makes it available throughout the app via DI
+// Register Entity Framework Core with PostgreSQL.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    // Tell Entity Framework to use PostgreSQL as the database provider
-    // UseNpgsql comes from the Npgsql.EntityFrameworkCore.PostgreSQL package
-    options.UseNpgsql(
-        // Pull the connection string from appsettings.json
-        // looks for "ConnectionStrings": { "DefaultConnection": "..." }
-        builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+    var connectionString =
+        builder.Configuration.GetConnectionString("DefaultConnection");
 
+    options.UseNpgsql(connectionString);
+});
 
 var app = builder.Build();
 
+// Enable Swagger during local development.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+// Global exception-handling middleware.
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseRouting();
-
-
-// Configure middleware
 app.UseHttpsRedirection();
+
 app.UseAuthorization();
-// Enable controllers
+
 app.MapControllers();
 
 app.Run();

@@ -27,7 +27,7 @@ public class BuildingService : IBuildingService
         return Result<IEnumerable<Building>>.Success(buildings, "Buildings retrieved successfully");
     }
 
-    // Get Building by Id
+    // Get Building by id
     public Result<Building> GetById(int id)
     {   
         // Returns null if not found
@@ -39,12 +39,24 @@ public class BuildingService : IBuildingService
         return Result<Building>.Success(building, "Building retrieved successfully");
     }
 
-    // Create Building Date
+    // Create Building Date  
     public async Task<Result<Building>> Create(Building building)
-    {
+    {        
+        // var nameExists = await _context.Buildings.AnyAsync(b => b.Name == building.Name);
+        //
+        // if (nameExists)
+        // {
+        //     return Result<Building>.Failure("A building with that name already exists.");
+        // }
         // Adds entity
         // Persists to database
         // Returns created object
+        var validation = await ValidateCreate(building);
+        if (!validation.IsSuccess)
+        {
+            return Result<Building>.Failure(validation.Message);
+        }
+        
         _context.Buildings.Add(building);
         await _context.SaveChangesAsync();
         //return building;
@@ -55,12 +67,16 @@ public class BuildingService : IBuildingService
     public async Task<Result<Building>> Update(int id, Building updatedBuilding)
     {
         var existing = await _context.Buildings.FirstOrDefaultAsync(b => b.Id == id);
-
         if (existing == null)
         {
             return Result<Building>.Failure("Building not found");
         }
-
+        
+        var nameExists = await _context.Buildings.AnyAsync(b => b.Name == updatedBuilding.Name && b.Id != id);
+        if (nameExists)
+        {
+            return Result<Building>.Failure("A building with that name already exists.");
+        }
         existing.Name = updatedBuilding.Name;
         existing.Address = updatedBuilding.Address;
         existing.NumberOfUnits = updatedBuilding.NumberOfUnits;
@@ -82,5 +98,18 @@ public class BuildingService : IBuildingService
         _context.Buildings.Remove(existing);
         await _context.SaveChangesAsync();
         return Result<bool>.Success(true, "Building deleted successfully");
+    }
+    // Helper ValidateCreate
+    private async Task<Result<bool>> ValidateCreate(Building building)
+    {
+        var nameExists = await _context.Buildings.AnyAsync(
+            b => b.Name == building.Name);
+
+        if (nameExists)
+        {
+            return Result<bool>.Failure("A building with that name already exists.");
+        }
+
+        return Result<bool>.Success(true, "Validation passed.");
     }
 }
