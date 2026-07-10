@@ -1,4 +1,4 @@
-namespace BuildingManagement.API.Models
+namespace PropertyManagement.API.Models
 {
     public static class ApiResponseFactory
     {

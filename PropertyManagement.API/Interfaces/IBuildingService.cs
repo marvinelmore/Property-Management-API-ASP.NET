@@ -1,8 +1,8 @@
-namespace BuildingManagement.API.Interfaces;
+namespace PropertyManagement.API.Interfaces;
 
-using BuildingManagement.API.Entities;
+using PropertyManagement.API.Entities;
 using System.Threading.Tasks;
-using BuildingManagement.API.Common;
+using PropertyManagement.API.Common;
 
 public interface IBuildingService
 {

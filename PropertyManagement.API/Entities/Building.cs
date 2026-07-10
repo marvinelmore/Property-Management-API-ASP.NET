@@ -1,4 +1,4 @@
-namespace BuildingManagement.API.Entities;
+namespace PropertyManagement.API.Entities;
 
 public class Building
     {

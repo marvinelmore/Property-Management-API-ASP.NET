@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using BuildingManagement.API.Entities;
-using BuildingManagement.API.Interfaces;
-using BuildingManagement.API.DTOs;
-using BuildingManagement.API.Models;
+using PropertyManagement.API.Entities;
+using PropertyManagement.API.Interfaces;
+using PropertyManagement.API.DTOs;
+using PropertyManagement.API.Models;
 
-namespace BuildingManagement.API.Controllers;
+namespace PropertyManagement.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using BuildingManagement.API.Entities;
+using PropertyManagement.API.Entities;
 
-namespace BuildingManagement.API.Data;
+namespace PropertyManagement.API.Data;
 
 public class ApplicationDbContext : DbContext
 {

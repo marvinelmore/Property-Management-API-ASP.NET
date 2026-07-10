@@ -1,7 +1,7 @@
 using System.Net;
 using System.Text.Json;
 
-namespace BuildingManagement.API.Middleware;
+namespace PropertyManagement.API.Middleware;
 
 public class ExceptionMiddleware
 {

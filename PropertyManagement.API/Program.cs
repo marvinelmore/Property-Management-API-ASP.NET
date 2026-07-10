@@ -1,7 +1,7 @@
-using BuildingManagement.API.Data;
-using BuildingManagement.API.Interfaces;
-using BuildingManagement.API.Middleware;
-using BuildingManagement.API.Services;
+using PropertyManagement.API.Data;
+using PropertyManagement.API.Interfaces;
+using PropertyManagement.API.Middleware;
+using PropertyManagement.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

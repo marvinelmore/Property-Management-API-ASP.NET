@@ -1,11 +1,11 @@
-@BuildingManagement_ApiHostAddress = http://localhost:5247
+@PropertyManagement_ApiHostAddress = http://localhost:5247
 
 ### GET
-GET {{BuildingManagement_ApiHostAddress}}/api/buildings
+GET {{PropertyManagement_ApiHostAddress}}/api/buildings
 Accept: application/json
 
 ### POST
-POST {{BuildingManagement_ApiHostAddress}}/api/buildings
+POST {{PropertyManagement_ApiHostAddress}}/api/buildings
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 
 ### PUT/UPDATE
 
-PUT {{BuildingManagement_ApiHostAddress}}/api/buildings/1
+PUT {{PropertyManagement_ApiHostAddress}}/api/buildings/1
 Content-Type: application/json
 
 {
@@ -26,9 +26,9 @@ Content-Type: application/json
 }
 
 ###
-DELETE {{BuildingManagement_ApiHostAddress}}/api/buildings/1 
+DELETE {{PropertyManagement_ApiHostAddress}}/api/buildings/1 
 
 ### ### Verify it was deleted 
-GET {{BuildingManagement_ApiHostAddress}}/api/buildings 
+GET {{PropertyManagement_ApiHostAddress}}/api/buildings 
 Accept: application/json
 

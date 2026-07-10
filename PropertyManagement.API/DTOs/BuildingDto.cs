@@ -1,4 +1,4 @@
-namespace BuildingManagement.API.DTOs;
+namespace PropertyManagement.API.DTOs;
 
 public class BuildingDto
     {

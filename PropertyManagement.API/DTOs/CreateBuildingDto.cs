@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BuildingManagement.API.DTOs;
+namespace PropertyManagement.API.DTOs;
 
 public class CreateBuildingDto
     {   

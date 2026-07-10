@@ -1,4 +1,4 @@
-namespace BuildingManagement.API.Common;
+namespace PropertyManagement.API.Common;
 
 public class Result<T>
 {

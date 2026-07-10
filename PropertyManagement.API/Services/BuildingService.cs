@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using BuildingManagement.API.Entities;
-using BuildingManagement.API.Interfaces;
-using BuildingManagement.API.Data;
-using BuildingManagement.API.Common;
+using PropertyManagement.API.Entities;
+using PropertyManagement.API.Interfaces;
+using PropertyManagement.API.Data;
+using PropertyManagement.API.Common;
 
-namespace BuildingManagement.API.Services;
+namespace PropertyManagement.API.Services;
 
 public class BuildingService : IBuildingService
 {
